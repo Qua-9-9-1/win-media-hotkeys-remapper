@@ -101,6 +101,13 @@ const table: Record<KeyId, KeyCodeInfo> = {
   BacklightKey: { kanata: '', ahk: '', label: '💡' },
   WinLockKey: { kanata: '', ahk: '', label: 'Win 🔒' },
   MacroRecord: { kanata: '', ahk: '', label: 'M' },
+  GameModeKey: { kanata: '', ahk: '', label: '🎮' },
+  ConnectKey: { kanata: '', ahk: '', label: 'Connect' },
+  SettingsKey: { kanata: '', ahk: '', label: '⚙' },
+  PrintPanelKey: { kanata: '', ahk: '', label: '🖨' },
+  ShowDesktopKey: { kanata: '', ahk: '', label: '▭' },
+  SearchKey: { kanata: '', ahk: '', label: '🔍' },
+  LangSwitchKey: { kanata: '', ahk: '', label: 'Lang' },
   // Kanata only knows `sleep` on Linux: treated as not interceptable to stay portable.
   Sleep: { kanata: '', ahk: 'Sleep', label: '☾' },
 };
@@ -114,6 +121,7 @@ for (let i = 0; i <= 9; i++) {
   table[`Numpad${i}`] = { kanata: `kp${i}`, ahk: `Numpad${i}`, label: String(i) };
 }
 for (let i = 1; i <= 6; i++) table[`G${i}`] = { kanata: '', ahk: '', label: `G${i}` };
+for (let i = 1; i <= 3; i++) table[`EasySwitch${i}`] = { kanata: '', ahk: '', label: `⇄${i}` };
 letters.split('').forEach((l, i) => {
   table[`Key${l}`] = { kanata: l.toLowerCase(), ahk: sc(letterScanCodes[i]) };
 });
