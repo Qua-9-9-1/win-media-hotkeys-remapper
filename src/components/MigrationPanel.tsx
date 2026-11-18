@@ -28,6 +28,7 @@ export function MigrationPanel({ profile, layout, config, onApply }: {
     onApply(r.config);
     const parts = [`${r.added} raccourci(s) importé(s)`];
     if (r.skippedNative) parts.push(`${r.skippedNative} déjà natif(s)`);
+    if (r.skippedUnsupported) parts.push(`${r.skippedUnsupported} fonction(s) matérielle(s) non transposable(s)`);
     if (r.skippedExisting) parts.push(`${r.skippedExisting} touche(s) déjà personnalisée(s), conservée(s)`);
     if (r.enabledFnTrigger) parts.push('Verr. Maj définie comme touche Fn virtuelle');
     setMessage(parts.join(' · ') + '.');
@@ -62,7 +63,8 @@ export function MigrationPanel({ profile, layout, config, onApply }: {
                 </span>
                 <ArrowRight size={12} className="text-slate-600" />
                 <a.icon size={13} className="text-amber-300" />
-                {a.label}
+                <span className={a.nativeOnly ? 'text-slate-500 line-through' : ''}>{a.label}</span>
+                {a.nativeOnly && <span className="text-slate-500">matériel</span>}
               </li>
             );
           })}
