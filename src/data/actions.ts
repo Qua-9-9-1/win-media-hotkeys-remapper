@@ -46,6 +46,11 @@ import {
   Sun,
   SunDim,
   TextCursorInput,
+  HardDrive,
+  Circle,
+  Gamepad2,
+  ZoomIn,
+  ZoomOut,
 } from 'lucide-react';
 import type { ActionCategory, ActionDefinition } from '../types/actions';
 
@@ -101,6 +106,12 @@ export const ACTIONS: ActionDefinition[] = [
     kanata: 'mail', ahk: { kind: 'send', keys: '{Launch_Mail}' } },
   { id: 'app.search', category: 'productivity', label: 'Recherche', short: 'Rech.', icon: Search,
     kanata: { windows: 'M-s', linux: null }, ahk: { kind: 'send', keys: '#s' } },
+  { id: 'app.myComputer', category: 'productivity', label: "Explorateur (Ce PC)", short: 'PC', icon: HardDrive,
+    kanata: { windows: 'M-e', linux: null }, ahk: { kind: 'send', keys: '#e' } },
+  { id: 'prod.zoomIn', category: 'productivity', label: 'Zoom avant', short: 'Zoom +', icon: ZoomIn,
+    kanata: 'C-kp+', ahk: { kind: 'send', keys: '^{NumpadAdd}' } },
+  { id: 'prod.zoomOut', category: 'productivity', label: 'Zoom arrière', short: 'Zoom −', icon: ZoomOut,
+    kanata: 'C-kp-', ahk: { kind: 'send', keys: '^{NumpadSub}' } },
   { id: 'sys.emoji', category: 'productivity', label: 'Panneau emoji', short: 'Emoji', icon: Smile,
     kanata: { windows: 'M-.', linux: null }, ahk: { kind: 'send', keys: '#.' } },
   { id: 'sys.dictation', category: 'productivity', label: 'DictÃ©e vocale', short: 'DictÃ©e', icon: Mic,
@@ -165,6 +176,10 @@ export const ACTIONS: ActionDefinition[] = [
     nativeOnly: true },
   { id: 'sys.backlight', category: 'system', label: 'RÃ©troÃ©clairage (mode)', short: 'Ã‰cl.', icon: Lightbulb,
     nativeOnly: true },
+  { id: 'hw.macroRecord', category: 'system', label: 'Enregistrer une macro', short: 'Macro',
+    icon: Circle, nativeOnly: true },
+  { id: 'hw.gamingMode', category: 'system', label: 'Mode jeu (désactive Windows)', short: 'Jeu',
+    icon: Gamepad2, nativeOnly: true },
   ...[1, 2, 3].map((n): ActionDefinition => ({
     id: `sys.easySwitch${n}`, category: 'system', label: `Basculer vers l'appareil ${n}`, short: `App. ${n}`,
     icon: Bluetooth, nativeOnly: true,
