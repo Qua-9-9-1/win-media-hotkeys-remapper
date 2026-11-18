@@ -1,0 +1,48 @@
+{
+  "id": "logitech-k380-fr",
+  "name": "Logitech K380 Multi-Device",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "75",
+    "standard": "ISO",
+    "leftMods": ["ControlLeft", "Fn", "MetaLeft", "AltLeft"],
+    "rightMods": ["AltRight", "ControlRight"],
+    "omit": ["PrintScreen", "Insert", "Delete", "Home", "PageUp", "PageDown", "End"],
+    "extraKeys": [
+      { "id": "AudioVolumeUp", "x": 13, "y": 0, "w": 1 },
+      { "id": "Delete", "x": 14, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "F1", "action": "sys.easySwitch1" },
+    { "layer": "base", "key": "F2", "action": "sys.easySwitch2" },
+    { "layer": "base", "key": "F3", "action": "sys.easySwitch3" },
+    { "layer": "base", "key": "F4", "action": "app.browserHome" },
+    { "layer": "base", "key": "F5", "action": "sys.appSwitch" },
+    { "layer": "base", "key": "F6", "action": "key.contextMenu" },
+    { "layer": "base", "key": "F7", "action": "app.browserBack" },
+    { "layer": "base", "key": "F8", "action": "media.prev" },
+    { "layer": "base", "key": "F9", "action": "media.playPause" },
+    { "layer": "base", "key": "F10", "action": "media.next" },
+    { "layer": "base", "key": "F11", "action": "media.mute" },
+    { "layer": "base", "key": "F12", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "fn", "key": "Tab", "action": "key.printScreen" },
+    { "layer": "fn", "key": "KeyX", "action": "prod.cut" },
+    { "layer": "fn", "key": "KeyC", "action": "prod.copy" },
+    { "layer": "fn", "key": "KeyV", "action": "prod.paste" },
+    { "layer": "fn", "key": "ArrowLeft", "action": "key.home" },
+    { "layer": "fn", "key": "ArrowRight", "action": "key.end" },
+    { "layer": "fn", "key": "ArrowUp", "action": "key.pgup" },
+    { "layer": "fn", "key": "ArrowDown", "action": "key.pgdn" },
+    { "layer": "fn", "key": "AudioVolumeUp", "action": "key.insert" }
+  ],
+  "sources": [
+    { "label": "Logitech : touches de raccourci du K380", "url": "https://support.logi.com/hc/en-us/articles/360023184954-Shortcut-and-media-keys-for-the-K380-keyboard" },
+    { "label": "Logitech : utiliser F1-F12 en touches standard", "url": "https://support.logi.com/hc/en-us/articles/360023263714" }
+  ],
+  "confidence": "medium",
+  "notes": "Par défaut, la rangée F envoie les fonctions multimédia ; Fn + F1…F12 envoie F1-F12. Pas de Fn Lock matériel : l'inversion se règle dans Logitech Options+. Fn + Tab (capture) et Fn + 13e touche (Inser) sont lus sur les légendes, à vérifier."
+}

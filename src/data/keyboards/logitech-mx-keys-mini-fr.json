@@ -1,0 +1,42 @@
+{
+  "id": "logitech-mx-keys-mini-fr",
+  "name": "Logitech MX Keys Mini",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "75",
+    "standard": "ISO",
+    "leftMods": ["ControlLeft", "Fn", "MetaLeft", "AltLeft"],
+    "rightMods": ["AltRight", "ControlRight"],
+    "omit": ["PrintScreen", "Insert", "Delete", "Home", "PageUp", "PageDown", "End"],
+    "extraKeys": [
+      { "id": "AudioVolumeUp", "x": 13, "y": 0, "w": 1 },
+      { "id": "Delete", "x": 14, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "F1", "action": "sys.easySwitch1" },
+    { "layer": "base", "key": "F2", "action": "sys.easySwitch2" },
+    { "layer": "base", "key": "F3", "action": "sys.easySwitch3" },
+    { "layer": "base", "key": "F4", "action": "sys.backlightDown" },
+    { "layer": "base", "key": "F5", "action": "sys.backlightUp" },
+    { "layer": "base", "key": "F6", "action": "sys.dictation" },
+    { "layer": "base", "key": "F7", "action": "sys.emoji" },
+    { "layer": "base", "key": "F8", "action": "prod.screenshot" },
+    { "layer": "base", "key": "F9", "action": "sys.micMute" },
+    { "layer": "base", "key": "F10", "action": "media.playPause" },
+    { "layer": "base", "key": "F11", "action": "media.mute" },
+    { "layer": "base", "key": "F12", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "fn", "key": "Escape", "action": "hw.fnLock" },
+    { "layer": "fn", "key": "AudioVolumeUp", "action": "key.insert" },
+    { "layer": "fn", "key": "Delete", "action": "sys.lock" }
+  ],
+  "sources": [
+    { "label": "Logitech : prise en main MX Keys Mini", "url": "https://support.logi.com/hc/en-us/articles/4409084730775-Getting-Started-MX-Keys-Mini" },
+    { "label": "Logitech : prise en main MX Keys Mini pour Mac", "url": "https://support.logi.com/hc/en-gb/articles/4409094450327-Getting-Started-MX-Keys-Mini-for-Mac" }
+  ],
+  "confidence": "medium",
+  "notes": "Par défaut, la rangée F envoie les fonctions multimédia ; Fn + F1…F12 envoie F1-F12, Fn + Échap inverse (Fn Lock). Pas de touches piste précédente/suivante. Fn + Inser et Fn + Suppr (verrouillage) sont lus sur les légendes, à vérifier."
+}
