@@ -1,0 +1,50 @@
+{
+  "id": "corsair-k55-rgb-pro",
+  "name": "Corsair K55 RGB PRO",
+  "vendor": "Corsair",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "rightOfAltGr": "Fn",
+    "offsetX": 1.5,
+    "offsetY": 1.25,
+    "extraKeys": [
+      { "id": "G1", "x": 0, "y": 1.25, "w": 1 },
+      { "id": "G2", "x": 0, "y": 2.75, "w": 1 },
+      { "id": "G3", "x": 0, "y": 3.75, "w": 1 },
+      { "id": "G4", "x": 0, "y": 4.75, "w": 1 },
+      { "id": "G5", "x": 0, "y": 5.75, "w": 1 },
+      { "id": "G6", "x": 0, "y": 6.75, "w": 1 },
+      { "id": "MacroRecord", "x": 12.5, "y": 0, "w": 1 },
+      { "id": "BacklightKey", "x": 13.5, "y": 0, "w": 1 },
+      { "id": "WinLockKey", "x": 14.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 16.75, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 17.75, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 18.75, "y": 0, "w": 1 },
+      { "id": "MediaStop", "x": 20, "y": 0, "w": 1 },
+      { "id": "MediaTrackPrevious", "x": 21, "y": 0, "w": 1 },
+      { "id": "MediaPlayPause", "x": 22, "y": 0, "w": 1 },
+      { "id": "MediaTrackNext", "x": 23, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "hid": [{ "vendorId": "0x1b1c", "productId": "0x1ba4" }],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MacroRecord", "action": "hw.macroRecord" },
+    { "layer": "base", "key": "BacklightKey", "action": "sys.backlight" },
+    { "layer": "base", "key": "WinLockKey", "action": "hw.winLock" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "MediaStop", "action": "media.stop" },
+    { "layer": "base", "key": "MediaTrackPrevious", "action": "media.prev" },
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "MediaTrackNext", "action": "media.next" }
+  ],
+  "sources": [
+    { "label": "Guide de démarrage Corsair K55 RGB PRO", "url": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/49_002202_AA_AP_K55_RGB_PRO_QSG_Web.pdf" }
+  ],
+  "confidence": "high",
+  "notes": "6 touches macro G1-G6 à gauche. Les combinaisons Fn ne concernent que l'éclairage (Fn + 1…0, -, =, [, ]). L'ordre des touches de volume et multimédia est lu sur le schéma du guide."
+}
