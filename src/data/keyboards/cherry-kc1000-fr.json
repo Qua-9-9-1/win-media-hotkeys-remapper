@@ -1,0 +1,29 @@
+{
+  "id": "cherry-kc1000-fr",
+  "name": "Cherry KC 1000",
+  "vendor": "Cherry",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "extraKeys": [
+      { "id": "LaunchApp2", "x": 18.5, "y": 0, "w": 1 },
+      { "id": "LaunchMail", "x": 19.5, "y": 0, "w": 1 },
+      { "id": "BrowserHome", "x": 20.5, "y": 0, "w": 1 },
+      { "id": "Sleep", "x": 21.5, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" },
+    { "layer": "base", "key": "LaunchMail", "action": "app.mail" },
+    { "layer": "base", "key": "BrowserHome", "action": "app.browserHome" },
+    { "layer": "base", "key": "Sleep", "action": "sys.sleep" }
+  ],
+  "sources": [
+    { "label": "Fiche technique Cherry KC 1000", "url": "https://docs.rs-online.com/695a/A700000015802839.pdf" },
+    { "label": "Page produit Cherry", "url": "https://www.cherry.de/en-gb/product/kc-1000" }
+  ],
+  "confidence": "high",
+  "notes": "4 touches de raccourci au-dessus du pavé numérique : calculatrice, e-mail, navigateur, veille."
+}

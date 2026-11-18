@@ -1,0 +1,42 @@
+{
+  "id": "cherry-stream-fr",
+  "name": "Cherry STREAM KEYBOARD",
+  "vendor": "Cherry",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "offsetY": 1,
+    "extraKeys": [
+      { "id": "MediaTrackPrevious", "x": 6.5, "y": 0, "w": 1 },
+      { "id": "MediaPlayPause", "x": 7.5, "y": 0, "w": 1 },
+      { "id": "MediaTrackNext", "x": 8.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 10, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 11, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 12, "y": 0, "w": 1 },
+      { "id": "BrowserHome", "x": 18.5, "y": 1, "w": 1 },
+      { "id": "LaunchMail", "x": 19.5, "y": 1, "w": 1 },
+      { "id": "LaunchApp2", "x": 20.5, "y": 1, "w": 1 },
+      { "id": "PcLock", "x": 21.5, "y": 1, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MediaTrackPrevious", "action": "media.prev" },
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "MediaTrackNext", "action": "media.next" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "BrowserHome", "action": "app.browserHome" },
+    { "layer": "base", "key": "LaunchMail", "action": "app.mail" },
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" },
+    { "layer": "base", "key": "PcLock", "action": "sys.lock" }
+  ],
+  "sources": [
+    { "label": "Fiche technique Cherry STREAM (DigiKey)", "url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/6254/JK-8500GB-2.pdf" },
+    { "label": "Fiche technique Cherry STREAM (Farnell)", "url": "https://www.farnell.com/datasheets/3108159.pdf" }
+  ],
+  "confidence": "medium",
+  "notes": "Les 10 fonctions viennent de la fiche Cherry ; la position exacte des touches multimédia dans le bandeau est estimée."
+}
