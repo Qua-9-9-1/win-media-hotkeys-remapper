@@ -44,10 +44,12 @@ export function NativeShortcuts({ profile, layout, onShow }: {
                 title={`Afficher sur le clavier : ${a.label}`}
                 className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-slate-900/80 px-2 py-1 text-xs text-slate-200 hover:border-amber-400/70"
               >
-                <kbd className="font-mono text-amber-300">
-                  {s.layer === 'fn' ? 'Fn + ' : ''}
-                  {profile.keys.find((k) => k.id === s.key)?.label ?? keyLegend(s.key, layout).main}
-                </kbd>
+                {/* Dedicated keys (base layer) are fully described by their icon. */}
+                {s.layer === 'fn' && (
+                  <kbd className="font-mono text-amber-300">
+                    Fn + {profile.keys.find((k) => k.id === s.key)?.label ?? keyLegend(s.key, layout).main}
+                  </kbd>
+                )}
                 <a.icon size={13} className="text-amber-300" />
                 {a.label}
               </button>
