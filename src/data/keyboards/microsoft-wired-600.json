@@ -1,0 +1,36 @@
+{
+  "id": "microsoft-wired-600",
+  "name": "Microsoft Wired Keyboard 600",
+  "vendor": "Microsoft",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "offsetY": 1,
+    "extraKeys": [
+      { "id": "MediaPlayPause", "x": 15.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 16.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 17.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 18.5, "y": 0, "w": 1 },
+      { "id": "LaunchApp2", "x": 21.5, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "hid": [
+    { "vendorId": "0x045e", "productId": "0x0750" },
+    { "vendorId": "0x045e", "productId": "0x07f8" }
+  ],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" }
+  ],
+  "sources": [
+    { "label": "Fiche SHI (touches de raccourci)", "url": "https://www.shi.com/product/19066637/Microsoft-Wired-Keyboard-600" },
+    { "label": "usb.ids", "url": "https://raw.githubusercontent.com/usbids/usbids/master/usb.ids" }
+  ],
+  "confidence": "low",
+  "notes": "Les 5 touches de raccourci (lecture/pause, muet, volume −/+, calculatrice) sont confirmées par les revendeurs, mais pas leur ordre ni leur position exacte : aucun manuel Microsoft trouvé."
+}
