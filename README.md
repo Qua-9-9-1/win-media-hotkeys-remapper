@@ -54,8 +54,23 @@ Créez `src/data/keyboards/<id>.json` :
   "geometry": { "template": "fullsize", "standard": "ISO", "rightOfAltGr": "Fn" },
   "hasFnKey": true,
   "hid": [{ "vendorId": "0x1234", "productId": "0x5678" }],
-  "nativeShortcuts": [{ "layer": "fn", "key": "F10", "action": "media.prev" }]
+  "nativeShortcuts": [
+    { "layer": "fn", "key": "F10", "action": "media.prev" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" }
+  ],
+  "sources": [{ "label": "Manuel officiel", "url": "https://..." }],
+  "confidence": "high",
+  "notes": "Précisions affichées sous les raccourcis natifs."
 }
 ```
 
-Pour une géométrie non standard, utilisez `"template": "custom"` avec une liste `keys` (`id`, `x`, `y`, `w`, `h` en unités de touche).
+- **Gabarits** : `fullsize` (100 %), `tkl` (sans pavé numérique), `75` (compact). Options :
+  `leftMods` / `rightMods` (modificateurs autour de la barre d'espace), `omit` (touches absentes),
+  `extraKeys` (touches dédiées placées à la main), `offsetX` / `offsetY` (place pour une rangée ou colonne en plus).
+  Pour une géométrie exotique, `"template": "custom"` avec une liste `keys` (`id`, `x`, `y`, `w`, `h` en unités).
+- **Raccourcis natifs** : `layer: "fn"` pour une combinaison Fn + touche, `layer: "base"` pour une touche
+  dédiée ou une rangée F qui envoie le multimédia par défaut.
+- **Sources obligatoires** dès qu'un profil a des raccourcis natifs (vérifié par les tests) : manuel ou fiche
+  technique du fabricant en priorité. `confidence` vaut `high` (documentation officielle), `medium` (fonctions
+  officielles, positions estimées) ou `low` (sources tierces).
+- Les touches propriétaires sans code standard (Easy-Switch, macro G1-G6…) sont affichées mais jamais remappables.
