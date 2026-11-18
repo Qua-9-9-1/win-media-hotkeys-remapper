@@ -1,0 +1,41 @@
+{
+  "id": "razer-cynosa-v2",
+  "name": "Razer Cynosa V2",
+  "vendor": "Razer",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "rightOfAltGr": "Fn",
+    "offsetY": 1.25,
+    "extraKeys": [
+      { "id": "MediaTrackPrevious", "x": 18.5, "y": 0, "w": 1 },
+      { "id": "MediaPlayPause", "x": 19.5, "y": 0, "w": 1 },
+      { "id": "MediaTrackNext", "x": 20.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 21.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 22.75, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 22.75, "y": 1, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "hid": [{ "vendorId": "0x1532", "productId": "0x025e" }],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MediaTrackPrevious", "action": "media.prev" },
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "MediaTrackNext", "action": "media.next" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "fn", "key": "F9", "action": "hw.macroRecord" },
+    { "layer": "fn", "key": "F10", "action": "hw.gamingMode" },
+    { "layer": "fn", "key": "F11", "action": "sys.backlightDown" },
+    { "layer": "fn", "key": "F12", "action": "sys.backlightUp" },
+    { "layer": "fn", "key": "Pause", "action": "sys.sleep" }
+  ],
+  "sources": [
+    { "label": "Razer Cynosa V2 Master Guide", "url": "https://dl.razerzone.com/master-guides/RazerSynapse3/CYNOSAV2-00000606-en.pdf" },
+    { "label": "Razer : aperçu Cynosa V2", "url": "https://mysupport.razer.com/app/answers/detail/a_id/2828/~/at-a-glance:-razer-cynosa-v2-%7C-rz03-03400" }
+  ],
+  "confidence": "high",
+  "notes": "4 boutons multimédia au-dessus du pavé numérique et molette/bascule de volume en haut à droite. Fn + F10 = mode jeu (désactive la touche Windows). Pas de Fn Lock."
+}
