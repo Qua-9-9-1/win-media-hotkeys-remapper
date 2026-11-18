@@ -1,6 +1,7 @@
 import type { RemapConfig } from '../types/config';
 import type { KeyboardProfile, LayerId } from '../types/keyboard';
 import { getAction } from '../data/actions';
+import { isDedicatedKey } from './keycodes';
 
 export interface MigrationResult {
   config: RemapConfig;
@@ -48,11 +49,15 @@ export function migrateShortcuts(
       skippedNative++;
       continue;
     }
-    if (layers[s.layer][s.key]) {
+    // A media function printed on a regular key (e.g. F8 = previous track on
+    // keyboards whose F row defaults to media) goes to the Fn layer, so the
+    // target keeps its normal F1-F12. Dedicated media keys keep their layer.
+    const layer: LayerId = s.layer === 'base' && !isDedicatedKey(s.key) ? 'fn' : s.layer;
+    if (layers[layer][s.key]) {
       skippedExisting++;
       continue;
     }
-    layers[s.layer][s.key] = s.action;
+    layers[layer][s.key] = s.action;
     added++;
   }
 

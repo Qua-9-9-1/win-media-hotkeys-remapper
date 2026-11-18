@@ -89,6 +89,13 @@ describe('migrateShortcuts', () => {
     expect(migrateShortcuts(initialConfig(), dell, dell).skippedNative).toBe(11);
   });
 
+  it('moves media functions of a media-first F row to the Fn layer', () => {
+    const k380 = getProfile('logitech-k380-fr');
+    const r = migrateShortcuts(initialConfig(), k380, k120);
+    expect(r.config.layers.base).toEqual({});
+    expect(r.config.layers.fn).toMatchObject({ F8: 'media.prev', F9: 'media.playPause', Tab: 'key.printScreen' });
+  });
+
   it('never imports nor exports firmware-only features like Fn Lock', () => {
     const r = migrateShortcuts(initialConfig(), dell, k120);
     expect(r.skippedUnsupported).toBe(1);

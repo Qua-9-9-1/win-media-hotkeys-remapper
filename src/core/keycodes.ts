@@ -128,6 +128,21 @@ letters.split('').forEach((l, i) => {
 
 export const KEY_CODES: Readonly<Record<KeyId, KeyCodeInfo>> = table;
 
+/** Media, launcher and vendor keys: not part of a standard 104/105-key layout. */
+const DEDICATED = new Set<KeyId>(
+  Object.keys(table).filter(
+    (id) =>
+      /^(Media|Audio|Launch|Browser|G\d|EasySwitch)/.test(id) ||
+      ['Sleep', 'ZoomIn', 'ZoomOut', 'PcLock'].includes(id) ||
+      id.endsWith('Key') ||
+      id === 'MacroRecord',
+  ),
+);
+
+export function isDedicatedKey(id: KeyId): boolean {
+  return DEDICATED.has(id);
+}
+
 /**
  * Keys that neither Kanata nor AutoHotkey can intercept (hardware Fn, vendor
  * keys handled by the firmware...). They are drawn but never remappable.
