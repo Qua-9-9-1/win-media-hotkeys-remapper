@@ -3,17 +3,39 @@
   "name": "Dell KB216",
   "vendor": "Dell",
   "layout": "fr-azerty",
-  "geometry": { "template": "fullsize", "standard": "ISO", "rightOfAltGr": "Fn" },
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "leftMods": ["ControlLeft", "FnLeft", "MetaLeft", "AltLeft"],
+    "rightOfAltGr": "Fn",
+    "omit": ["PrintScreen", "ScrollLock", "Pause"],
+    "extraKeys": [
+      { "id": "AudioVolumeMute", "x": 15.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 16.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 17.25, "y": 0, "w": 1 }
+    ]
+  },
   "hasFnKey": true,
   "hid": [{ "vendorId": "0x413c", "productId": "0x2113" }],
   "nativeShortcuts": [
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
     { "layer": "fn", "key": "Escape", "action": "hw.fnLock" },
-    { "layer": "fn", "key": "F1", "action": "media.mute" },
-    { "layer": "fn", "key": "F2", "action": "media.volDown" },
-    { "layer": "fn", "key": "F3", "action": "media.volUp" },
+    { "layer": "fn", "key": "F1", "action": "sys.sleep" },
+    { "layer": "fn", "key": "F9", "action": "app.search" },
     { "layer": "fn", "key": "F10", "action": "media.prev" },
     { "layer": "fn", "key": "F11", "action": "media.playPause" },
-    { "layer": "fn", "key": "F12", "action": "media.next" }
+    { "layer": "fn", "key": "F12", "action": "media.next" },
+    { "layer": "fn", "key": "Insert", "action": "key.printScreen" },
+    { "layer": "fn", "key": "Home", "action": "key.scrollLock" },
+    { "layer": "fn", "key": "PageUp", "action": "key.pause" }
   ],
-  "notes": "Clavier filaire plein format avec touche Fn matérielle (à droite d'Alt Gr, à la place de la touche Windows droite). Fn + Échap active le Fn Lock ; raccourcis multimédia natifs via Fn + F1-F3 et Fn + F10-F12."
+  "sources": [
+    { "label": "Fiche technique Dell KB216", "url": "https://delltechnologies.com/asset/en-us/products/electronics-and-accessories/technical-support/dell_multimedia_keyboard_kb216_data_sheet.pdf" },
+    { "label": "Dell : touches multimédia des claviers externes", "url": "https://www.dell.com/support/kbdoc/en-us/000205137/how-to-use-the-multimedia-and-function-keys-on-dell-external-multimedia-keyboards" },
+    { "label": "Deskthority (disposition)", "url": "https://deskthority.net/wiki/Dell_KB216" }
+  ],
+  "confidence": "high",
+  "notes": "Muet / Volume − / Volume + remplacent Impr. écran, Arrêt défil. et Pause, déplacées sur Fn + Inser / Origine / Pg↑. Fn + Échap inverse F1-F12 et fonctions multimédia."
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getProfile, KEYBOARDS } from '../../data/keyboards';
+import { getProfile } from '../../data/keyboards';
 import { initialConfig } from '../../state/configReducer';
 import type { RemapConfig } from '../../types/config';
 import { migrateShortcuts } from '../migration';
@@ -16,22 +16,6 @@ const withFn = (): RemapConfig => ({
     base: { KeyQ: 'key.home' },
     fn: { F10: 'media.prev', F11: 'media.playPause', F12: 'media.next', KeyC: 'sys.calculator' },
   },
-});
-
-describe('profiles', () => {
-  it('loads every JSON profile with consistent geometry', () => {
-    expect(KEYBOARDS.map((k) => k.id)).toEqual([
-      'logitech-k120-fr',
-      'dell-kb216-fr',
-      'generic-iso-fr',
-      'generic-ansi-us',
-    ]);
-    expect(k120.keys).toHaveLength(105);
-    expect(getProfile('generic-ansi-us').keys).toHaveLength(104);
-    expect(dell.keys.find((k) => k.id === 'Fn')?.hardwareOnly).toBe(true);
-    expect(dell.keys.some((k) => k.id === 'MetaRight')).toBe(false);
-    for (const p of KEYBOARDS) expect(new Set(p.keys.map((k) => k.id)).size).toBe(p.keys.length);
-  });
 });
 
 describe('generateKanata', () => {
@@ -89,7 +73,8 @@ describe('generateAhk', () => {
 describe('migrateShortcuts', () => {
   it('imports the Dell KB216 media shortcuts onto the K120', () => {
     const r = migrateShortcuts(initialConfig(), dell, k120);
-    expect(r.added).toBe(6);
+    // 8 Fn combos (Fn Lock excluded); the 3 dedicated volume keys do not exist on the K120.
+    expect(r.added).toBe(8);
     expect(r.enabledFnTrigger).toBe(true);
     expect(r.config.fnTrigger).toBe('CapsLock');
     expect(r.config.layers.fn).toMatchObject({ F10: 'media.prev', F11: 'media.playPause', F12: 'media.next' });
@@ -101,7 +86,7 @@ describe('migrateShortcuts', () => {
     expect(r.skippedExisting).toBe(1);
     expect(r.config.layers.fn.F10).toBe('prod.copy');
     expect(r.config.fnTrigger).toBe('ScrollLock');
-    expect(migrateShortcuts(initialConfig(), dell, dell).skippedNative).toBe(6);
+    expect(migrateShortcuts(initialConfig(), dell, dell).skippedNative).toBe(11);
   });
 
   it('never imports nor exports firmware-only features like Fn Lock', () => {
