@@ -1,0 +1,50 @@
+{
+  "id": "dell-kb522-fr",
+  "name": "Dell KB522 Business Multimedia",
+  "vendor": "Dell",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "offsetY": 1.25,
+    "extraKeys": [
+      { "id": "BrowserHome", "x": 0, "y": 0, "w": 1 },
+      { "id": "LaunchMail", "x": 1, "y": 0, "w": 1 },
+      { "id": "LaunchApp1", "x": 2, "y": 0, "w": 1 },
+      { "id": "LaunchApp2", "x": 3, "y": 0, "w": 1 },
+      { "id": "ZoomIn", "x": 6.5, "y": 0, "w": 1 },
+      { "id": "ZoomOut", "x": 7.5, "y": 0, "w": 1 },
+      { "id": "MediaTrackPrevious", "x": 11, "y": 0, "w": 1 },
+      { "id": "MediaPlayPause", "x": 12, "y": 0, "w": 1 },
+      { "id": "MediaTrackNext", "x": 13, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 15.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 16.25, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 17.25, "y": 0, "w": 1 },
+      { "id": "MediaSelect", "x": 18.5, "y": 0, "w": 1 },
+      { "id": "Sleep", "x": 21.5, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "BrowserHome", "action": "app.browserHome" },
+    { "layer": "base", "key": "LaunchMail", "action": "app.mail" },
+    { "layer": "base", "key": "LaunchApp1", "action": "app.myComputer" },
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" },
+    { "layer": "base", "key": "ZoomIn", "action": "prod.zoomIn" },
+    { "layer": "base", "key": "ZoomOut", "action": "prod.zoomOut" },
+    { "layer": "base", "key": "MediaTrackPrevious", "action": "media.prev" },
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "MediaTrackNext", "action": "media.next" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "MediaSelect", "action": "app.mediaPlayer" },
+    { "layer": "base", "key": "Sleep", "action": "sys.sleep" }
+  ],
+  "sources": [
+    { "label": "Fiche technique Dell KB522", "url": "https://i.dell.com/sites/csdocuments/Merchandizing_Docs/ja/jp/dell_business_multimedia_keyboard_kb522_data_sheet.pdf" },
+    { "label": "Deskthority", "url": "https://deskthority.net/wiki/Dell_KB522" }
+  ],
+  "confidence": "medium",
+  "notes": "Les 14 fonctions sont celles de la fiche Dell ; leur position exacte dans le bandeau supérieur est estimée. Le volume est une molette (représentée par deux touches)."
+}
