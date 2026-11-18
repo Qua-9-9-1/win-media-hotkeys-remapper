@@ -1,0 +1,9 @@
+{
+  "id": "generic-tkl-iso",
+  "name": "Clavier générique TKL (sans pavé num.) ISO",
+  "vendor": "Générique",
+  "layout": "fr-azerty",
+  "geometry": { "template": "tkl", "standard": "ISO" },
+  "hasFnKey": false,
+  "nativeShortcuts": []
+}

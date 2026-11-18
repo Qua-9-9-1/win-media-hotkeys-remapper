@@ -1,0 +1,9 @@
+{
+  "id": "generic-75-ansi",
+  "name": "Clavier générique compact 75 % ANSI",
+  "vendor": "Générique",
+  "layout": "us-qwerty",
+  "geometry": { "template": "75", "standard": "ANSI" },
+  "hasFnKey": true,
+  "nativeShortcuts": []
+}

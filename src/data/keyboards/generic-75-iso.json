@@ -1,0 +1,9 @@
+{
+  "id": "generic-75-iso",
+  "name": "Clavier générique compact 75 % ISO",
+  "vendor": "Générique",
+  "layout": "fr-azerty",
+  "geometry": { "template": "75", "standard": "ISO" },
+  "hasFnKey": true,
+  "nativeShortcuts": []
+}

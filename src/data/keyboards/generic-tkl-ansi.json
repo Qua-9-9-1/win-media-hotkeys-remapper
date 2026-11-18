@@ -1,0 +1,9 @@
+{
+  "id": "generic-tkl-ansi",
+  "name": "Clavier générique TKL (sans pavé num.) ANSI",
+  "vendor": "Générique",
+  "layout": "us-qwerty",
+  "geometry": { "template": "tkl", "standard": "ANSI" },
+  "hasFnKey": false,
+  "nativeShortcuts": []
+}
