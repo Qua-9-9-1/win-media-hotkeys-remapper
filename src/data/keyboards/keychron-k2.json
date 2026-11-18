@@ -1,0 +1,45 @@
+{
+  "id": "keychron-k2",
+  "name": "Keychron K2 (V2)",
+  "vendor": "Keychron",
+  "layout": "us-qwerty",
+  "geometry": {
+    "template": "75",
+    "standard": "ANSI",
+    "omit": ["PrintScreen", "Insert", "Delete", "Home", "PageUp", "PageDown"],
+    "extraKeys": [
+      { "id": "ScreenshotKey", "x": 13, "y": 0, "w": 1 },
+      { "id": "Delete", "x": 14, "y": 0, "w": 1 },
+      { "id": "BacklightKey", "x": 15, "y": 0, "w": 1 },
+      { "id": "PageUp", "x": 15, "y": 1, "w": 1 },
+      { "id": "PageDown", "x": 15, "y": 2, "w": 1 },
+      { "id": "Home", "x": 15, "y": 3, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "hid": [{ "vendorId": "0x05ac", "productId": "0x024f" }],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "BacklightKey", "action": "sys.backlight" },
+    { "layer": "fn", "key": "F1", "action": "sys.brightnessDown" },
+    { "layer": "fn", "key": "F2", "action": "sys.brightnessUp" },
+    { "layer": "fn", "key": "F5", "action": "sys.backlightDown" },
+    { "layer": "fn", "key": "F6", "action": "sys.backlightUp" },
+    { "layer": "fn", "key": "F7", "action": "media.prev" },
+    { "layer": "fn", "key": "F8", "action": "media.playPause" },
+    { "layer": "fn", "key": "F9", "action": "media.next" },
+    { "layer": "fn", "key": "F10", "action": "media.mute" },
+    { "layer": "fn", "key": "F11", "action": "media.volDown" },
+    { "layer": "fn", "key": "F12", "action": "media.volUp" },
+    { "layer": "fn", "key": "Delete", "action": "key.insert" },
+    { "layer": "fn", "key": "Digit1", "action": "sys.easySwitch1" },
+    { "layer": "fn", "key": "Digit2", "action": "sys.easySwitch2" },
+    { "layer": "fn", "key": "Digit3", "action": "sys.easySwitch3" },
+    { "layer": "fn", "key": "MetaLeft", "action": "hw.winLock" }
+  ],
+  "sources": [
+    { "label": "Keychron : combinaisons de touches K2", "url": "https://www.keychron.com/blogs/news/k2-key-combinations" },
+    { "label": "Manuel Keychron K2", "url": "https://www.keychron.com/pages/k2-keyboard-user-manual" }
+  ],
+  "confidence": "high",
+  "notes": "Mode Windows (interrupteur latéral). Fn + X + L (maintenu 3-4 s) inverse F1-F12 et multimédia. Fn + F3/F4 (Mission Control / Launchpad) sont des fonctions macOS. Fn + Win maintenu 3 s = verrouillage Windows."
+}

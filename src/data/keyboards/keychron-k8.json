@@ -1,0 +1,42 @@
+{
+  "id": "keychron-k8",
+  "name": "Keychron K8",
+  "vendor": "Keychron",
+  "layout": "us-qwerty",
+  "geometry": {
+    "template": "tkl",
+    "standard": "ANSI",
+    "rightMods": ["AltRight", "MetaRight", "Fn", "ControlRight"],
+    "omit": ["PrintScreen", "ScrollLock", "Pause"],
+    "extraKeys": [
+      { "id": "ScreenshotKey", "x": 15.25, "y": 0, "w": 1 },
+      { "id": "CortanaKey", "x": 16.25, "y": 0, "w": 1 },
+      { "id": "BacklightKey", "x": 17.25, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": true,
+  "hid": [{ "vendorId": "0x05ac", "productId": "0x024f" }],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "BacklightKey", "action": "sys.backlight" },
+    { "layer": "fn", "key": "F1", "action": "sys.brightnessDown" },
+    { "layer": "fn", "key": "F2", "action": "sys.brightnessUp" },
+    { "layer": "fn", "key": "F5", "action": "sys.backlightDown" },
+    { "layer": "fn", "key": "F6", "action": "sys.backlightUp" },
+    { "layer": "fn", "key": "F7", "action": "media.prev" },
+    { "layer": "fn", "key": "F8", "action": "media.playPause" },
+    { "layer": "fn", "key": "F9", "action": "media.next" },
+    { "layer": "fn", "key": "F10", "action": "media.mute" },
+    { "layer": "fn", "key": "F11", "action": "media.volDown" },
+    { "layer": "fn", "key": "F12", "action": "media.volUp" },
+    { "layer": "fn", "key": "Digit1", "action": "sys.easySwitch1" },
+    { "layer": "fn", "key": "Digit2", "action": "sys.easySwitch2" },
+    { "layer": "fn", "key": "Digit3", "action": "sys.easySwitch3" },
+    { "layer": "fn", "key": "MetaLeft", "action": "hw.winLock" }
+  ],
+  "sources": [
+    { "label": "Keychron : combinaisons de touches K8", "url": "https://keychron.com/blogs/news/k8-key-combinations" },
+    { "label": "Manuel Keychron K8", "url": "https://cdn.shopify.com/s/files/1/0059/0630/1017/files/k8_user_manual_english_version.pdf?v=1609224503" }
+  ],
+  "confidence": "high",
+  "notes": "K8 d'origine (pas Pro/Max), mode Windows. Fn + X + L (maintenu 3-4 s) inverse F1-F12 et multimédia. Verrouillage Windows (Fn + Win) uniquement sur la version non rétroéclairée."
+}
