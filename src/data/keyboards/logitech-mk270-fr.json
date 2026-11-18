@@ -1,0 +1,39 @@
+{
+  "id": "logitech-mk270-fr",
+  "name": "Logitech K270 / MK270",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "rightMods": ["AltRight", "ContextMenu", "ControlRight"],
+    "offsetY": 1,
+    "extraKeys": [
+      { "id": "MediaPlayPause", "x": 2, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 3, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 4, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 5, "y": 0, "w": 1 },
+      { "id": "BrowserHome", "x": 6.5, "y": 0, "w": 1 },
+      { "id": "LaunchMail", "x": 7.5, "y": 0, "w": 1 },
+      { "id": "Sleep", "x": 8.5, "y": 0, "w": 1 },
+      { "id": "LaunchApp2", "x": 9.5, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "BrowserHome", "action": "app.browserHome" },
+    { "layer": "base", "key": "LaunchMail", "action": "app.mail" },
+    { "layer": "base", "key": "Sleep", "action": "sys.sleep" },
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" }
+  ],
+  "sources": [
+    { "label": "Page produit Logitech MK270", "url": "https://www.logitech.com/en-us/shop/p/mk270-wireless-keyboard-mouse" },
+    { "label": "Guide de démarrage MK270", "url": "https://www.logitech.com/assets/45924/wireless-combo-mk270-quick-start-guide.pdf" }
+  ],
+  "confidence": "medium",
+  "notes": "8 touches de raccourci au-dessus de F1-F8, ordre lu sur la photo officielle (d'anciennes révisions du K270 auraient Stop/Préc./Suiv.). Pas de touche Windows droite."
+}

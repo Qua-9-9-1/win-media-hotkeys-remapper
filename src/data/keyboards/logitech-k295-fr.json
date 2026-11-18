@@ -1,0 +1,39 @@
+{
+  "id": "logitech-k295-fr",
+  "name": "Logitech K295 / MK295 Silent",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "rightMods": ["AltRight", "ContextMenu", "ControlRight"],
+    "offsetY": 1,
+    "extraKeys": [
+      { "id": "MediaPlayPause", "x": 2, "y": 0, "w": 1 },
+      { "id": "AudioVolumeMute", "x": 3, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 4, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 5, "y": 0, "w": 1 },
+      { "id": "BrowserHome", "x": 6.5, "y": 0, "w": 1 },
+      { "id": "LaunchMail", "x": 7.5, "y": 0, "w": 1 },
+      { "id": "Sleep", "x": 8.5, "y": 0, "w": 1 },
+      { "id": "LaunchApp2", "x": 9.5, "y": 0, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "nativeShortcuts": [
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "BrowserHome", "action": "app.browserHome" },
+    { "layer": "base", "key": "LaunchMail", "action": "app.mail" },
+    { "layer": "base", "key": "Sleep", "action": "sys.sleep" },
+    { "layer": "base", "key": "LaunchApp2", "action": "sys.calculator" }
+  ],
+  "sources": [
+    { "label": "Logitech : prise en main MK295 Silent", "url": "https://support.logi.com/hc/en-ph/articles/360053683453-Getting-Started-MK295-Silent-Wireless-Combo" },
+    { "label": "Schéma officiel des raccourcis", "url": "https://cx-assets.logi.com/CC%20Graphics/MK295%20Combo/MK295GS_4.jpg" }
+  ],
+  "confidence": "high",
+  "notes": "8 touches de raccourci au-dessus de F1-F8. Pas de touche Windows droite. Sans fil (récepteur USB)."
+}
