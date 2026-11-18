@@ -1,11 +1,13 @@
 import type { TargetOs } from '../types/actions';
 import type { RemapConfig } from '../types/config';
-import type { KeyId, LayerId } from '../types/keyboard';
+import type { KeyId, LayerId, LayoutId } from '../types/keyboard';
 import { DEFAULT_PROFILE_ID, KEYBOARDS } from '../data/keyboards';
+import { LAYOUT_IDS } from '../core/layouts';
 
 export type ConfigAction =
   | { type: 'setProfile'; profileId: string }
   | { type: 'setTargetOs'; os: TargetOs }
+  | { type: 'setLayout'; layout: LayoutId | 'auto' }
   | { type: 'assign'; layer: LayerId; key: KeyId; actionId: string }
   | { type: 'clear'; layer: LayerId; key: KeyId }
   | { type: 'clearLayer'; layer: LayerId }
@@ -17,6 +19,7 @@ export function initialConfig(targetOs: TargetOs = 'windows'): RemapConfig {
   return {
     profileId: DEFAULT_PROFILE_ID,
     targetOs,
+    layout: 'auto',
     fnTrigger: null,
     fnTapPassthrough: true,
     layers: { base: {}, fn: {} },
@@ -35,6 +38,8 @@ export function configReducer(state: RemapConfig, action: ConfigAction): RemapCo
       return { ...state, profileId: action.profileId };
     case 'setTargetOs':
       return { ...state, targetOs: action.os };
+    case 'setLayout':
+      return { ...state, layout: action.layout };
     case 'assign': {
       // The virtual Fn key is reserved: assigning a base action to it frees it.
       const freesTrigger = action.layer === 'base' && action.key === state.fnTrigger;
@@ -86,6 +91,7 @@ export function loadConfig(fallbackOs: TargetOs): RemapConfig {
       layers: { base: parsed.layers?.base ?? {}, fn: parsed.layers?.fn ?? {} },
     };
     if (!KEYBOARDS.some((k) => k.id === merged.profileId)) merged.profileId = base.profileId;
+    if (merged.layout !== 'auto' && !LAYOUT_IDS.includes(merged.layout)) merged.layout = 'auto';
     return merged;
   } catch {
     return initialConfig(fallbackOs);
