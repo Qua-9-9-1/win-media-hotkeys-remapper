@@ -1,13 +1,14 @@
 import { Info, MousePointerClick, Sparkles, Trash2, X } from 'lucide-react';
 import type { RemapConfig } from '../types/config';
-import type { KeyboardProfile, KeyId, LayerId } from '../types/keyboard';
+import type { KeyboardProfile, KeyId, LayerId, LayoutId } from '../types/keyboard';
 import { getAction } from '../data/actions';
 import { keyLegend } from '../core/layouts';
 import { KEY_CODES } from '../core/keycodes';
 import { Badge, Button, Card } from './ui';
 
-export function KeyInspector({ profile, config, layer, selectedKey, onClear, onSetFnTrigger, onDeselect }: {
+export function KeyInspector({ profile, layout, config, layer, selectedKey, onClear, onSetFnTrigger, onDeselect }: {
   profile: KeyboardProfile;
+  layout: LayoutId;
   config: RemapConfig;
   layer: LayerId;
   selectedKey: KeyId | null;
@@ -28,7 +29,7 @@ export function KeyInspector({ profile, config, layer, selectedKey, onClear, onS
   }
 
   const key = profile.keys.find((k) => k.id === selectedKey);
-  const legend = keyLegend(selectedKey, profile.layout);
+  const legend = keyLegend(selectedKey, layout);
   const custom = getAction(config.layers[layer][selectedKey]);
   const native = getAction(
     profile.nativeShortcuts.find((s) => s.layer === layer && s.key === selectedKey)?.action,

@@ -1,15 +1,10 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Keyboard, RotateCcw } from 'lucide-react';
 import type { KeyId, LayerId, LayoutId } from './types/keyboard';
 import { getProfile } from './data/keyboards';
 import { getAction } from './data/actions';
-import { keyLegend } from './core/layouts';
-import {
-  detectLayoutFromApi,
-  detectOs,
-  guessLayoutFromLanguage,
-  layoutFromKey,
-} from './core/detection';
+import { keyLegend, matchLayout } from './core/layouts';
+import { detectLayoutFromApi, detectOs, guessLayoutFromLanguage } from './core/detection';
 import { configReducer, hasSavedConfig, initialConfig, loadConfig, saveConfig } from './state/configReducer';
 import { VirtualKeyboard } from './components/keyboard/VirtualKeyboard';
 import { LayerTabs, Legend } from './components/LayerTabs';
@@ -19,7 +14,7 @@ import { ActionLibrary } from './components/ActionLibrary';
 import { MigrationPanel } from './components/MigrationPanel';
 import { CodePreview, type ExportFormat } from './components/CodePreview';
 import { HelpModal } from './components/HelpModal';
-import { DetectionBar } from './components/DetectionBar';
+import { DetectionBar, type LayoutSource } from './components/DetectionBar';
 import { Button } from './components/ui';
 import { KEY_CODES } from './core/keycodes';
 
@@ -35,31 +30,41 @@ export default function App() {
   const [layer, setLayer] = useState<LayerId>('base');
   const [selectedKey, setSelectedKey] = useState<KeyId | null>(null);
   const [pressed, setPressed] = useState<ReadonlySet<KeyId>>(new Set());
-  const [layout, setLayout] = useState<LayoutId>(guessLayoutFromLanguage);
-  const [layoutSource, setLayoutSource] = useState<'api' | 'keystroke' | 'language'>('language');
+  const [detectedLayout, setDetectedLayout] = useState<LayoutId>(guessLayoutFromLanguage);
+  const [layoutSource, setLayoutSource] = useState<LayoutSource>('language');
   const [help, setHelp] = useState<ExportFormat | null>(null);
+  const layoutSourceRef = useRef(layoutSource);
+  layoutSourceRef.current = layoutSource;
 
   const profile = getProfile(config.profileId);
+  const layout = config.layout === 'auto' ? detectedLayout : config.layout;
 
   useEffect(() => saveConfig(config), [config]);
 
   // Layout detection through the Keyboard Map API, when available.
   useEffect(() => {
-    detectLayoutFromApi().then((l) => {
+    detectLayoutFromApi(guessLayoutFromLanguage()).then((l) => {
       if (!l) return;
-      setLayout(l);
+      setDetectedLayout(l);
       setLayoutSource('api');
+      // US users usually have an ANSI keyboard (no key next to left Shift).
       if (isFirstVisit && l === 'us-qwerty') dispatch({ type: 'setProfile', profileId: 'generic-ansi-us' });
     });
   }, [isFirstVisit]);
 
   // Physical keystrokes: live highlight, key selection, layout detection fallback.
   useEffect(() => {
+    const observed = new Map<string, string>();
+    const preferred = guessLayoutFromLanguage();
     const down = (e: KeyboardEvent) => {
-      const l = layoutFromKey(e.code, e.key);
-      if (l) {
-        setLayout(l);
-        setLayoutSource((s) => (s === 'api' ? s : 'keystroke'));
+      // Learn from typed characters (ignoring Ctrl/Alt combos) until the API answered.
+      if (layoutSourceRef.current !== 'api' && !e.ctrlKey && !e.altKey && !e.metaKey && Array.from(e.key).length === 1) {
+        observed.set(e.code, e.key);
+        const l = matchLayout(observed, preferred);
+        if (l) {
+          setDetectedLayout(l);
+          setLayoutSource('keystroke');
+        }
       }
       if (!KEY_CODES[e.code]) return;
       setPressed((p) => new Set(p).add(e.code));
@@ -93,7 +98,7 @@ export default function App() {
   const selected = profile.keys.find((k) => k.id === selectedKey);
   const canAssign = !!selected && !selected.hardwareOnly && selected.id !== config.fnTrigger;
   const targetLabel = selected
-    ? `${layer === 'fn' ? 'Fn + ' : ''}${keyLegend(selected.id, profile.layout).main || 'Espace'}`
+    ? `${layer === 'fn' ? 'Fn + ' : ''}${keyLegend(selected.id, layout).main || 'Espace'}`
     : '';
 
   const assign = (key: KeyId, actionId: string) => {
@@ -136,8 +141,10 @@ export default function App() {
         <div className="rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3">
           <DetectionBar
             os={detectedOs}
-            layout={layout}
+            detectedLayout={detectedLayout}
             layoutSource={layoutSource}
+            layoutSetting={config.layout}
+            onLayout={(l) => dispatch({ type: 'setLayout', layout: l })}
             profile={profile}
             onProfile={(id) => {
               dispatch({ type: 'setProfile', profileId: id });
@@ -153,6 +160,7 @@ export default function App() {
             <LayerTabs layer={layer} onChange={setLayer} counts={counts} fnHint={fnHint} />
             <VirtualKeyboard
               profile={profile}
+              layout={layout}
               config={config}
               layer={layer}
               selectedKey={selectedKey}
@@ -166,6 +174,7 @@ export default function App() {
           <div className="grid gap-5 md:grid-cols-2">
             <KeyInspector
               profile={profile}
+              layout={layout}
               config={config}
               layer={layer}
               selectedKey={selectedKey}
@@ -202,6 +211,7 @@ export default function App() {
           />
           <MigrationPanel
             profile={profile}
+            layout={layout}
             config={config}
             onApply={(c) => {
               dispatch({ type: 'replace', config: c });

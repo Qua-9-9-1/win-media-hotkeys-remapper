@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { RemapConfig } from '../../types/config';
-import type { KeyboardProfile, KeyId, LayerId } from '../../types/keyboard';
+import type { KeyboardProfile, KeyId, LayerId, LayoutId } from '../../types/keyboard';
 import { getAction } from '../../data/actions';
 import { keyLegend } from '../../core/layouts';
 import { KeyCap } from './KeyCap';
@@ -22,8 +22,9 @@ function useUnit(widthInUnits: number) {
   return { ref, unit };
 }
 
-export function VirtualKeyboard({ profile, config, layer, selectedKey, pressedKeys, onSelect, onAssign }: {
+export function VirtualKeyboard({ profile, layout, config, layer, selectedKey, pressedKeys, onSelect, onAssign }: {
   profile: KeyboardProfile;
+  layout: LayoutId;
   config: RemapConfig;
   layer: LayerId;
   selectedKey: KeyId | null;
@@ -53,7 +54,7 @@ export function VirtualKeyboard({ profile, config, layer, selectedKey, pressedKe
               k={k}
               unit={unit}
               state={{
-                legend: keyLegend(k.id, profile.layout),
+                legend: keyLegend(k.id, layout),
                 custom: getAction(config.layers[layer][k.id]),
                 native: natives.get(k.id) ?? undefined,
                 isFnTrigger: config.fnTrigger === k.id,

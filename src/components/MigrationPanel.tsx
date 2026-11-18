@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { ArrowRight, Import } from 'lucide-react';
 import type { RemapConfig } from '../types/config';
-import type { KeyboardProfile } from '../types/keyboard';
+import type { KeyboardProfile, LayoutId } from '../types/keyboard';
 import { KEYBOARDS } from '../data/keyboards';
 import { getAction } from '../data/actions';
 import { keyLegend } from '../core/layouts';
 import { migrateShortcuts } from '../core/migration';
 import { Button, Card, selectClass } from './ui';
 
-export function MigrationPanel({ profile, config, onApply }: {
+export function MigrationPanel({ profile, layout, config, onApply }: {
   profile: KeyboardProfile;
+  layout: LayoutId;
   config: RemapConfig;
   onApply: (config: RemapConfig) => void;
 }) {
@@ -57,7 +58,7 @@ export function MigrationPanel({ profile, config, onApply }: {
               <li key={`${s.layer}-${s.key}`} className="flex items-center gap-2 text-slate-300">
                 <span className="w-16 font-mono text-slate-500">
                   {s.layer === 'fn' ? 'Fn + ' : ''}
-                  {keyLegend(s.key, source.layout).main}
+                  {keyLegend(s.key, layout).main}
                 </span>
                 <ArrowRight size={12} className="text-slate-600" />
                 <a.icon size={13} className="text-amber-300" />
