@@ -84,6 +84,8 @@ export type GeometryDefinition =
       omit?: KeyId[];
       /** Moves the whole template down, to make room for a row of extra keys. */
       offsetY?: number;
+      /** Moves the whole template right, to make room for a column (e.g. macro keys). */
+      offsetX?: number;
       /** Extra keys (media keys, launchers...) placed by hand. */
       extraKeys?: KeyPlacement[];
     }

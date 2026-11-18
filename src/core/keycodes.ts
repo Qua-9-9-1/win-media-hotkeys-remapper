@@ -74,6 +74,8 @@ const table: Record<KeyId, KeyCodeInfo> = {
   NumpadEnter: { kanata: 'kprt', ahk: 'NumpadEnter', label: 'Entrée' },
   NumpadDecimal: { kanata: 'kp.', ahk: 'NumpadDot', label: '.' },
   Fn: { kanata: '', ahk: '', label: 'Fn' },
+  // Second hardware Fn key, on keyboards that have one on each side.
+  FnLeft: { kanata: '', ahk: '', label: 'Fn' },
 
   // Dedicated media / launcher keys found on many office keyboards.
   // Kanata names checked in kanata/parser/src/keys/mod.rs; empty = not interceptable.
@@ -89,6 +91,16 @@ const table: Record<KeyId, KeyCodeInfo> = {
   BrowserHome: { kanata: 'hmpg', ahk: 'Browser_Home', label: '⌂' },
   BrowserSearch: { kanata: '', ahk: 'Browser_Search', label: '🔍' },
   MediaSelect: { kanata: '', ahk: 'Launch_Media', label: '♫' },
+  LaunchApp1: { kanata: '', ahk: 'Launch_App1', label: 'PC' },
+  // Vendor keys without a portable/documented scan code: displayed, never remappable.
+  ZoomIn: { kanata: '', ahk: '', label: 'Zoom +' },
+  ZoomOut: { kanata: '', ahk: '', label: 'Zoom −' },
+  PcLock: { kanata: '', ahk: '', label: '🔒' },
+  ScreenshotKey: { kanata: '', ahk: '', label: '📷' },
+  CortanaKey: { kanata: '', ahk: '', label: '◯' },
+  BacklightKey: { kanata: '', ahk: '', label: '💡' },
+  WinLockKey: { kanata: '', ahk: '', label: 'Win 🔒' },
+  MacroRecord: { kanata: '', ahk: '', label: 'M' },
   // Kanata only knows `sleep` on Linux: treated as not interceptable to stay portable.
   Sleep: { kanata: '', ahk: 'Sleep', label: '☾' },
 };
@@ -101,11 +113,21 @@ for (let i = 0; i <= 9; i++) {
   table[`Digit${i}`] = { kanata: String(i), ahk: sc(i === 0 ? 0x0b : i + 1) };
   table[`Numpad${i}`] = { kanata: `kp${i}`, ahk: `Numpad${i}`, label: String(i) };
 }
+for (let i = 1; i <= 6; i++) table[`G${i}`] = { kanata: '', ahk: '', label: `G${i}` };
 letters.split('').forEach((l, i) => {
   table[`Key${l}`] = { kanata: l.toLowerCase(), ahk: sc(letterScanCodes[i]) };
 });
 
 export const KEY_CODES: Readonly<Record<KeyId, KeyCodeInfo>> = table;
+
+/**
+ * Keys that neither Kanata nor AutoHotkey can intercept (hardware Fn, vendor
+ * keys handled by the firmware...). They are drawn but never remappable.
+ */
+export function isHardwareOnly(id: KeyId): boolean {
+  const info = KEY_CODES[id];
+  return !!info && !info.kanata && !info.ahk;
+}
 
 export function keyInfo(id: KeyId): KeyCodeInfo {
   const info = KEY_CODES[id];

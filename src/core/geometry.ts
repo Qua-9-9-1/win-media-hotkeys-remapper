@@ -1,4 +1,5 @@
 import type { FormFactor, GeometryDefinition, KeyId, PhysicalKey, PhysicalStandard } from '../types/keyboard';
+import { isHardwareOnly } from './keycodes';
 
 type Row = Array<[KeyId, number, number?]>; // [id, x, width]
 
@@ -125,10 +126,11 @@ export function buildGeometry(def: GeometryDefinition): PhysicalKey[] {
     const rightMods =
       def.rightMods ?? (def.rightOfAltGr ? ['AltRight', def.rightOfAltGr, 'ContextMenu', 'ControlRight'] : undefined);
     const omit = new Set(def.omit ?? []);
+    const dx = def.offsetX ?? 0;
     const dy = def.offsetY ?? 0;
     keys = fromTemplate(def.template, def.standard, def.leftMods, rightMods)
       .filter((k) => !omit.has(k.id))
-      .map((k) => ({ ...k, y: k.y + dy }));
+      .map((k) => ({ ...k, x: k.x + dx, y: k.y + dy }));
     for (const k of def.extraKeys ?? []) keys.push({ ...k, h: k.h ?? 1, shape: k.shape ?? 'rect' });
   }
   const ids = new Set<KeyId>();
@@ -136,7 +138,7 @@ export function buildGeometry(def: GeometryDefinition): PhysicalKey[] {
     if (ids.has(k.id)) throw new Error(`Duplicate key "${k.id}" in geometry`);
     ids.add(k.id);
   }
-  return keys.map((k) => (k.id === 'Fn' ? { ...k, hardwareOnly: true } : k));
+  return keys.map((k) => (isHardwareOnly(k.id) ? { ...k, hardwareOnly: true } : k));
 }
 
 export function boundingBox(keys: PhysicalKey[]): { width: number; height: number } {
