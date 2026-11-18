@@ -15,6 +15,7 @@ import { MigrationPanel } from './components/MigrationPanel';
 import { CodePreview, type ExportFormat } from './components/CodePreview';
 import { HelpModal } from './components/HelpModal';
 import { DetectionBar, type LayoutSource } from './components/DetectionBar';
+import { NativeShortcuts } from './components/NativeShortcuts';
 import { Button } from './components/ui';
 import { KEY_CODES } from './core/keycodes';
 
@@ -169,6 +170,14 @@ export default function App() {
               onAssign={assign}
             />
             <Legend />
+            <NativeShortcuts
+              profile={profile}
+              layout={layout}
+              onShow={(l, key) => {
+                setLayer(l);
+                setSelectedKey(key);
+              }}
+            />
           </section>
 
           <div className="grid gap-5 md:grid-cols-2">
