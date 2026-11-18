@@ -56,7 +56,7 @@ export function VirtualKeyboard({ profile, layout, config, layer, selectedKey, p
               k={k}
               unit={unit}
               state={{
-                legend: keyLegend(k.id, layout),
+                legend: k.label ? { main: k.label } : keyLegend(k.id, layout),
                 custom: getAction(config.layers[layer][k.id]),
                 native: natives.get(k.id) ?? undefined,
                 nativeFn: nativeFn.get(k.id) ?? undefined,
