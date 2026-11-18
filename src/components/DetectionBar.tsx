@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Keyboard, Laptop, Usb } from 'lucide-react';
 import type { KeyboardProfile, LayoutId } from '../types/keyboard';
-import { KEYBOARDS } from '../data/keyboards';
+import { KEYBOARDS, keyboardsByVendor } from '../data/keyboards';
 import { LAYOUT_IDS, LAYOUT_NAMES } from '../core/layouts';
 import { detectWithWebHid, formatHidId, isWebHidSupported, type DetectedOs } from '../core/detection';
 import { Badge, Button, selectClass } from './ui';
@@ -11,6 +11,13 @@ const OS_NAMES: Record<DetectedOs, string> = {
   linux: 'Linux',
   macos: 'macOS',
   unknown: 'OS inconnu',
+};
+
+const FORM_FACTOR_NAMES: Record<KeyboardProfile['formFactor'], string> = {
+  fullsize: '100 %',
+  tkl: 'TKL',
+  '75': '75 %',
+  custom: 'compact',
 };
 
 export type LayoutSource = 'api' | 'keystroke' | 'language';
@@ -90,10 +97,14 @@ export function DetectionBar({ os, detectedLayout, layoutSource, layoutSetting, 
         <label className="flex items-center gap-2 text-sm text-slate-400">
           Mon clavier :
           <select className={selectClass} value={profile.id} onChange={(e) => onProfile(e.target.value)}>
-            {KEYBOARDS.map((k) => (
-              <option key={k.id} value={k.id}>
-                {k.name} · {k.standard}
-              </option>
+            {keyboardsByVendor().map(([vendor, models]) => (
+              <optgroup key={vendor} label={vendor}>
+                {models.map((k) => (
+                  <option key={k.id} value={k.id}>
+                    {k.name} · {FORM_FACTOR_NAMES[k.formFactor]} {k.standard}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </label>
