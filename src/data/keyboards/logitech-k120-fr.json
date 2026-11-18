@@ -7,5 +7,10 @@
   "hasFnKey": false,
   "hid": [{ "vendorId": "0x046d", "productId": "0xc31c" }],
   "nativeShortcuts": [],
-  "notes": "Clavier filaire plein format 105 touches, sans touche Fn ni touches multimédia."
+  "sources": [
+    { "label": "Page produit Logitech K120", "url": "https://www.logitech.com/en-us/shop/p/k120-usb-standard-computer" },
+    { "label": "usb.ids", "url": "http://www.linux-usb.org/usb.ids" }
+  ],
+  "confidence": "high",
+  "notes": "Clavier filaire plein format, sans touche Fn ni touche multimédia."
 }
