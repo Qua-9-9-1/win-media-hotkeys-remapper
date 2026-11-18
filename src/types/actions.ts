@@ -6,9 +6,10 @@ export type ActionCategory = 'media' | 'productivity' | 'system' | 'keys';
 
 /**
  * Kanata output for an action. Either a plain Kanata action string
- * (`pp`, `C-c`, `(cmd calc.exe)`...) or one string per OS.
+ * (`pp`, `C-c`, `(cmd calc.exe)`...) or one string per OS (`null` = not
+ * available on that OS).
  */
-export type KanataOutput = string | Record<TargetOs, string>;
+export type KanataOutput = string | Record<TargetOs, string | null>;
 
 /** AutoHotkey v2 output (Windows only). */
 export type AhkOutput =
@@ -26,10 +27,10 @@ export interface ActionDefinition {
   /** Very short label printed on the virtual key (keep under ~8 chars). */
   short: string;
   icon: LucideIcon;
-  kanata: KanataOutput;
-  ahk: AhkOutput;
-  /** True when the Kanata output runs a program (needs `danger-enable-cmd`). */
-  kanataCmd?: boolean;
+  /** Omitted when Kanata has no equivalent (the generator then warns). */
+  kanata?: KanataOutput;
+  /** Omitted when AutoHotkey has no equivalent (the generator then warns). */
+  ahk?: AhkOutput;
   /**
    * Firmware-only feature (e.g. Fn Lock): shown on keyboards that have it,
    * never offered in the library nor exported.

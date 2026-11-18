@@ -2,12 +2,14 @@ import type { ActionDefinition, TargetOs } from '../../types/actions';
 import type { RemapConfig } from '../../types/config';
 import type { KeyboardProfile, KeyId } from '../../types/keyboard';
 import { keyInfo } from '../keycodes';
-import { buildExportPlan, GENERATOR_NAME } from './shared';
+import { buildExportPlan, GENERATOR_NAME, type ResolvedMapping } from './shared';
 
 const FN_ALIAS = 'fn';
 const TAP_HOLD_MS = 200;
 
-export function kanataAction(action: ActionDefinition, os: TargetOs): string {
+/** Kanata action string, or `null` when Kanata has no equivalent on this OS. */
+export function kanataAction(action: ActionDefinition, os: TargetOs): string | null {
+  if (action.kanata === undefined) return null;
   return typeof action.kanata === 'string' ? action.kanata : action.kanata[os];
 }
 
@@ -25,10 +27,25 @@ export function generateKanata(config: RemapConfig, profile: KeyboardProfile): s
     ';; Documentation : https://github.com/jtroo/kanata',
     '',
   ];
-  plan.warnings.forEach((w) => lines.push(`;; ⚠ ${w}`));
-
-  const baseMap = new Map(plan.base.map((m) => [m.key, kanataAction(m.action, os)]));
-  const fnMap = new Map(plan.fn.map((m) => [m.key, kanataAction(m.action, os)]));
+  const warnings = [...plan.warnings];
+  const exportable = (maps: ResolvedMapping[]) =>
+    new Map(
+      maps.flatMap((m): Array<[KeyId, string]> => {
+        const out = kanataAction(m.action, os);
+        if (!keyInfo(m.key).kanata) {
+          warnings.push(`Touche ${m.key} ignorée : Kanata ne sait pas l'intercepter.`);
+          return [];
+        }
+        if (out === null) {
+          warnings.push(`« ${m.action.label} » ignoré : pas d'équivalent Kanata sous ${os === 'windows' ? 'Windows' : 'Linux'}.`);
+          return [];
+        }
+        return [[m.key, out]];
+      }),
+    );
+  const baseMap = exportable(plan.base);
+  const fnMap = exportable(plan.fn);
+  warnings.forEach((w) => lines.push(`;; ⚠ ${w}`));
   const order = new Map(profile.keys.map((k, i) => [k.id, i]));
 
   const used = new Set<KeyId>([...baseMap.keys(), ...fnMap.keys()]);
@@ -46,7 +63,7 @@ export function generateKanata(config: RemapConfig, profile: KeyboardProfile): s
     return lines.join('\n') + '\n';
   }
 
-  const needsCmd = [...plan.base, ...plan.fn].some((m) => m.action.kanataCmd);
+  const needsCmd = [...baseMap.values(), ...fnMap.values()].some((v) => v.startsWith('(cmd'));
   lines.push('(defcfg', '  ;; Les touches non listées dans defsrc gardent leur comportement normal.', '  process-unmapped-keys yes');
   if (needsCmd) {
     lines.push(

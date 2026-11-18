@@ -10,6 +10,9 @@ const ahkString = (s: string) => `"${s.replace(/`/g, '``').replace(/"/g, '`"')}"
 export function ahkHotkey(key: KeyId, action: ActionDefinition): string {
   const k = keyInfo(key).ahk;
   const label = `  ; ${action.label}`;
+  if (!action.ahk || !k) {
+    return `; ⚠ ${key} → « ${action.label} » ignoré : pas d'équivalent AutoHotkey.`;
+  }
   switch (action.ahk.kind) {
     case 'remap':
       return `${k}::${action.ahk.target}${label}`;

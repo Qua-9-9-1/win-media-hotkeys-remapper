@@ -55,6 +55,15 @@ describe('generateKanata', () => {
     expect(linux).toContain('(cmd gnome-calculator)');
   });
 
+  it('skips actions without Kanata equivalent with a warning', () => {
+    const config = { ...initialConfig(), layers: { base: { F5: 'media.stop', F6: 'app.mail' }, fn: {} } };
+    const out = generateKanata(config, k120);
+    expect(out).toContain('« Stop » ignoré');
+    expect(out).toMatch(/\(defsrc\n\s+f6\n\)/);
+    expect(out).not.toContain('danger-enable-cmd');
+    expect(generateAhk(config, k120)).toContain('F5::Send "{Media_Stop}"');
+  });
+
   it('produces a valid no-op file when nothing is mapped', () => {
     expect(generateKanata(initialConfig(), k120)).toContain('(defsrc esc)');
   });
