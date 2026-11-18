@@ -15,8 +15,18 @@ export type KeyId = string;
 /** Physical standard: ISO has the extra key next to left Shift and a tall Enter. */
 export type PhysicalStandard = 'ISO' | 'ANSI';
 
-/** Logical layout used to print legends on the virtual keyboard. */
-export type LayoutId = 'fr-azerty' | 'us-qwerty';
+/** Logical (regional) layout used to print legends on the virtual keyboard. */
+export type LayoutId =
+  | 'us-qwerty'
+  | 'uk-qwerty'
+  | 'fr-azerty'
+  | 'be-azerty'
+  | 'ch-qwertz'
+  | 'de-qwertz'
+  | 'es-qwerty'
+  | 'it-qwerty'
+  | 'pt-qwerty'
+  | 'nordic-qwerty';
 
 /** Special key shapes that cannot be drawn as a simple rectangle. */
 export type KeyShape = 'rect' | 'iso-enter';

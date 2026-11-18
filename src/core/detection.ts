@@ -1,5 +1,6 @@
 import type { TargetOs } from '../types/actions';
 import type { KeyboardProfile, LayoutId } from '../types/keyboard';
+import { matchLayout } from './layouts';
 
 export type DetectedOs = TargetOs | 'macos' | 'unknown';
 
@@ -12,38 +13,61 @@ export function detectOs(): DetectedOs {
   return 'unknown';
 }
 
-type LayoutMap = { get(code: string): string | undefined };
+type LayoutMap = { forEach(cb: (value: string, key: string) => void): void };
 type KeyboardApi = { getLayoutMap(): Promise<LayoutMap> };
 
 /**
- * Uses the Keyboard Map API (Chromium) to read which character the `KeyQ`
- * position produces. Returns `null` when the API is unavailable.
+ * Reads the real OS layout through the Keyboard Map API (Chromium only) and
+ * matches it against the known layouts. Returns `null` when unavailable.
  */
-export async function detectLayoutFromApi(): Promise<LayoutId | null> {
+export async function detectLayoutFromApi(preferred = guessLayoutFromLanguage()): Promise<LayoutId | null> {
   const kb = (navigator as Navigator & { keyboard?: KeyboardApi }).keyboard;
   if (!kb?.getLayoutMap) return null;
   try {
     const map = await kb.getLayoutMap();
-    return layoutFromKey('KeyQ', map.get('KeyQ') ?? '');
+    const observed = new Map<string, string>();
+    map.forEach((value, code) => observed.set(code, value));
+    return matchLayout(observed, preferred);
   } catch {
     return null;
   }
 }
 
-/** Infers the layout from one keystroke (physical code + produced character). */
-export function layoutFromKey(code: string, key: string): LayoutId | null {
-  const k = key.toLowerCase();
-  if (code === 'KeyQ') return k === 'a' ? 'fr-azerty' : k === 'q' ? 'us-qwerty' : null;
-  if (code === 'KeyA') return k === 'q' ? 'fr-azerty' : k === 'a' ? 'us-qwerty' : null;
-  if (code === 'KeyW') return k === 'z' ? 'fr-azerty' : k === 'w' ? 'us-qwerty' : null;
-  if (code === 'KeyZ') return k === 'w' ? 'fr-azerty' : k === 'z' ? 'us-qwerty' : null;
-  if (code === 'Semicolon') return k === 'm' ? 'fr-azerty' : k === ';' ? 'us-qwerty' : null;
+/**
+ * Most likely layout for a BCP 47 locale ("fr-BE", "de-CH", "en-GB"...).
+ * Region wins over language: French speakers in Belgium or Switzerland do not
+ * use the French AZERTY.
+ */
+export function layoutFromLocale(locale: string): LayoutId | null {
+  const [lang, ...rest] = locale.toLowerCase().split('-');
+  const region = rest.find((p) => p.length === 2);
+  if (region === 'be') return 'be-azerty';
+  if (region === 'ch' || region === 'li') return 'ch-qwertz';
+  if (region === 'gb' || region === 'ie') return 'uk-qwerty';
+  if (lang === 'fr') return region && region !== 'fr' && region !== 'lu' && region !== 'mc' ? 'us-qwerty' : 'fr-azerty';
+  if (lang === 'de') return 'de-qwertz';
+  if (lang === 'es' || lang === 'ca' || lang === 'gl' || lang === 'eu') return 'es-qwerty';
+  if (lang === 'it') return 'it-qwerty';
+  if (lang === 'pt') return region === 'br' ? 'us-qwerty' : 'pt-qwerty';
+  if (['sv', 'fi', 'nb', 'nn', 'no', 'da'].includes(lang)) return 'nordic-qwerty';
+  if (lang === 'nl') return 'us-qwerty';
+  if (lang === 'en') return 'us-qwerty';
   return null;
 }
 
-/** Weak guess from browser language, used only before any other signal. */
+/** Infers the layout from one keystroke (physical code + produced character). */
+export function layoutFromKey(code: string, key: string, preferred = guessLayoutFromLanguage()): LayoutId | null {
+  if (Array.from(key).length !== 1) return null;
+  return matchLayout(new Map([[code, key]]), preferred);
+}
+
+/** Guess from the browser languages, used until a stronger signal arrives. */
 export function guessLayoutFromLanguage(): LayoutId {
-  return navigator.language.toLowerCase().startsWith('fr') ? 'fr-azerty' : 'us-qwerty';
+  for (const l of navigator.languages?.length ? navigator.languages : [navigator.language]) {
+    const layout = layoutFromLocale(l);
+    if (layout) return layout;
+  }
+  return 'us-qwerty';
 }
 
 // ── WebHID ───────────────────────────────────────────────────────────────
