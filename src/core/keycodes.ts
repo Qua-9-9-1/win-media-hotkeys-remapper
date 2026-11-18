@@ -74,6 +74,23 @@ const table: Record<KeyId, KeyCodeInfo> = {
   NumpadEnter: { kanata: 'kprt', ahk: 'NumpadEnter', label: 'Entrée' },
   NumpadDecimal: { kanata: 'kp.', ahk: 'NumpadDot', label: '.' },
   Fn: { kanata: '', ahk: '', label: 'Fn' },
+
+  // Dedicated media / launcher keys found on many office keyboards.
+  // Kanata names checked in kanata/parser/src/keys/mod.rs; empty = not interceptable.
+  MediaPlayPause: { kanata: 'pp', ahk: 'Media_Play_Pause', label: '⏯' },
+  MediaTrackNext: { kanata: 'next', ahk: 'Media_Next', label: '⏭' },
+  MediaTrackPrevious: { kanata: 'prev', ahk: 'Media_Prev', label: '⏮' },
+  MediaStop: { kanata: '', ahk: 'Media_Stop', label: '⏹' },
+  AudioVolumeMute: { kanata: 'mute', ahk: 'Volume_Mute', label: '🔇' },
+  AudioVolumeDown: { kanata: 'vold', ahk: 'Volume_Down', label: '🔉' },
+  AudioVolumeUp: { kanata: 'volu', ahk: 'Volume_Up', label: '🔊' },
+  LaunchMail: { kanata: 'mail', ahk: 'Launch_Mail', label: '✉' },
+  LaunchApp2: { kanata: 'calc', ahk: 'Launch_App2', label: 'Calc' },
+  BrowserHome: { kanata: 'hmpg', ahk: 'Browser_Home', label: '⌂' },
+  BrowserSearch: { kanata: '', ahk: 'Browser_Search', label: '🔍' },
+  MediaSelect: { kanata: '', ahk: 'Launch_Media', label: '♫' },
+  // Kanata only knows `sleep` on Linux: treated as not interceptable to stay portable.
+  Sleep: { kanata: '', ahk: 'Sleep', label: '☾' },
 };
 
 for (let i = 1; i <= 12; i++) {

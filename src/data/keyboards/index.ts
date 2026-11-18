@@ -15,6 +15,7 @@ export function resolveProfile(def: KeyboardProfileDefinition): KeyboardProfile 
   return {
     ...def,
     standard: def.geometry.standard,
+    formFactor: def.geometry.template,
     keys,
     hid: (def.hid ?? []).map((h) => ({
       vendorId: parseInt(h.vendorId, 16),
@@ -24,15 +25,24 @@ export function resolveProfile(def: KeyboardProfileDefinition): KeyboardProfile 
   };
 }
 
-const ORDER = ['logitech-k120-fr', 'dell-kb216-fr', 'generic-iso-fr', 'generic-ansi-us'];
+export const GENERIC_VENDOR = 'Générique';
 
+/** Sorted by vendor then name; generic templates last. */
 export const KEYBOARDS: KeyboardProfile[] = Object.values(modules)
   .map(resolveProfile)
-  .sort((a, b) => {
-    const ia = ORDER.indexOf(a.id);
-    const ib = ORDER.indexOf(b.id);
-    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.name.localeCompare(b.name);
-  });
+  .sort(
+    (a, b) =>
+      Number(a.vendor === GENERIC_VENDOR) - Number(b.vendor === GENERIC_VENDOR) ||
+      a.vendor.localeCompare(b.vendor) ||
+      a.name.localeCompare(b.name, undefined, { numeric: true }),
+  );
+
+/** Profiles grouped by vendor, for `<optgroup>` menus. */
+export function keyboardsByVendor(): Array<[string, KeyboardProfile[]]> {
+  const groups = new Map<string, KeyboardProfile[]>();
+  for (const k of KEYBOARDS) groups.set(k.vendor, [...(groups.get(k.vendor) ?? []), k]);
+  return [...groups];
+}
 
 export const DEFAULT_PROFILE_ID = 'logitech-k120-fr';
 
