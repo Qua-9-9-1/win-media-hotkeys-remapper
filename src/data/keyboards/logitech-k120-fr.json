@@ -1,0 +1,11 @@
+{
+  "id": "logitech-k120-fr",
+  "name": "Logitech K120",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": { "template": "fullsize", "standard": "ISO", "rightOfAltGr": "MetaRight" },
+  "hasFnKey": false,
+  "hid": [{ "vendorId": "0x046d", "productId": "0xc31c" }],
+  "nativeShortcuts": [],
+  "notes": "Clavier filaire plein format 105 touches, sans touche Fn ni touches multimédia."
+}

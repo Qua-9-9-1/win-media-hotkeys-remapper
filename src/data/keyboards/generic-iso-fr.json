@@ -1,0 +1,9 @@
+{
+  "id": "generic-iso-fr",
+  "name": "Clavier générique 100 % ISO",
+  "vendor": "Générique",
+  "layout": "fr-azerty",
+  "geometry": { "template": "fullsize", "standard": "ISO", "rightOfAltGr": "MetaRight" },
+  "hasFnKey": false,
+  "nativeShortcuts": []
+}

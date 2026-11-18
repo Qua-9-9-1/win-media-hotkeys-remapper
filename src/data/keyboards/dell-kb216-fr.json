@@ -1,0 +1,18 @@
+{
+  "id": "dell-kb216-fr",
+  "name": "Dell KB216",
+  "vendor": "Dell",
+  "layout": "fr-azerty",
+  "geometry": { "template": "fullsize", "standard": "ISO", "rightOfAltGr": "Fn" },
+  "hasFnKey": true,
+  "hid": [{ "vendorId": "0x413c", "productId": "0x2113" }],
+  "nativeShortcuts": [
+    { "layer": "fn", "key": "F1", "action": "media.mute" },
+    { "layer": "fn", "key": "F2", "action": "media.volDown" },
+    { "layer": "fn", "key": "F3", "action": "media.volUp" },
+    { "layer": "fn", "key": "F10", "action": "media.prev" },
+    { "layer": "fn", "key": "F11", "action": "media.playPause" },
+    { "layer": "fn", "key": "F12", "action": "media.next" }
+  ],
+  "notes": "Clavier filaire plein format avec touche Fn matérielle (à droite d'Alt Gr, à la place de la touche Windows droite). Raccourcis multimédia natifs via Fn + F1-F3 et Fn + F10-F12."
+}

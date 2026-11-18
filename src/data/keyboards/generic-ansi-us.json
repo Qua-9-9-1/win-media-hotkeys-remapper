@@ -1,0 +1,9 @@
+{
+  "id": "generic-ansi-us",
+  "name": "Clavier générique 100 % ANSI",
+  "vendor": "Générique",
+  "layout": "us-qwerty",
+  "geometry": { "template": "fullsize", "standard": "ANSI", "rightOfAltGr": "MetaRight" },
+  "hasFnKey": false,
+  "nativeShortcuts": []
+}
