@@ -1,0 +1,41 @@
+{
+  "id": "logitech-g213-fr",
+  "name": "Logitech G213 Prodigy",
+  "vendor": "Logitech",
+  "layout": "fr-azerty",
+  "geometry": {
+    "template": "fullsize",
+    "standard": "ISO",
+    "offsetY": 2.5,
+    "extraKeys": [
+      { "id": "AudioVolumeMute", "x": 19.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeDown", "x": 20.5, "y": 0, "w": 1 },
+      { "id": "AudioVolumeUp", "x": 21.5, "y": 0, "w": 1 },
+      { "id": "GameModeKey", "x": 15.25, "y": 1.25, "w": 1 },
+      { "id": "BacklightKey", "x": 17.25, "y": 1.25, "w": 1 },
+      { "id": "MediaPlayPause", "x": 18.5, "y": 1.25, "w": 1 },
+      { "id": "MediaStop", "x": 19.5, "y": 1.25, "w": 1 },
+      { "id": "MediaTrackPrevious", "x": 20.5, "y": 1.25, "w": 1 },
+      { "id": "MediaTrackNext", "x": 21.5, "y": 1.25, "w": 1 }
+    ]
+  },
+  "hasFnKey": false,
+  "hid": [{ "vendorId": "0x046d", "productId": "0xc336" }],
+  "nativeShortcuts": [
+    { "layer": "base", "key": "AudioVolumeMute", "action": "media.mute" },
+    { "layer": "base", "key": "AudioVolumeDown", "action": "media.volDown" },
+    { "layer": "base", "key": "AudioVolumeUp", "action": "media.volUp" },
+    { "layer": "base", "key": "GameModeKey", "action": "hw.gamingMode" },
+    { "layer": "base", "key": "BacklightKey", "action": "sys.backlight" },
+    { "layer": "base", "key": "MediaPlayPause", "action": "media.playPause" },
+    { "layer": "base", "key": "MediaStop", "action": "media.stop" },
+    { "layer": "base", "key": "MediaTrackPrevious", "action": "media.prev" },
+    { "layer": "base", "key": "MediaTrackNext", "action": "media.next" }
+  ],
+  "sources": [
+    { "label": "Logitech : mode jeu du G213", "url": "https://support.logi.com/hc/en-gb/articles/360023176094-Activate-Game-Mode-and-disable-keys-on-the-G213-gaming-keyboard" },
+    { "label": "Page produit Logitech G213", "url": "https://www.logitechg.com/en-us/shop/p/g213-rgb-gaming-keyboard" }
+  ],
+  "confidence": "high",
+  "notes": "Pas de touche Fn (les combinaisons Fn + F9…F12 souvent citées concernent les G413/G512/G513). Touches mode jeu et rétroéclairage au-dessus d'Impr. écran et Pause ; multimédia au-dessus du pavé numérique."
+}
