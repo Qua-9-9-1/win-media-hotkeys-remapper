@@ -33,9 +33,11 @@ export function VirtualKeyboard({ profile, layout, config, layer, selectedKey, p
   onAssign: (key: KeyId, actionId: string) => void;
 }) {
   const { ref, unit } = useUnit(profile.width + 0.5);
-  const natives = new Map(
-    profile.nativeShortcuts.filter((s) => s.layer === layer).map((s) => [s.key, getAction(s.action)]),
-  );
+  const nativesOf = (l: LayerId) =>
+    new Map(profile.nativeShortcuts.filter((s) => s.layer === l).map((s) => [s.key, getAction(s.action)]));
+  const natives = nativesOf(layer);
+  // On the base layer, Fn shortcuts are shown like icons printed on real keycaps.
+  const nativeFn = layer === 'base' ? nativesOf('fn') : new Map();
 
   return (
     <div ref={ref} className="w-full overflow-x-auto pb-1">
@@ -57,6 +59,7 @@ export function VirtualKeyboard({ profile, layout, config, layer, selectedKey, p
                 legend: keyLegend(k.id, layout),
                 custom: getAction(config.layers[layer][k.id]),
                 native: natives.get(k.id) ?? undefined,
+                nativeFn: nativeFn.get(k.id) ?? undefined,
                 isFnTrigger: config.fnTrigger === k.id,
                 fnLayer: layer === 'fn',
                 selected: selectedKey === k.id,

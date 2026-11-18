@@ -11,6 +11,8 @@ export interface KeyCapState {
   custom?: ActionDefinition;
   /** Native (firmware) shortcut on the active layer. */
   native?: ActionDefinition;
+  /** On the base layer: native Fn shortcut, printed as a small secondary legend. */
+  nativeFn?: ActionDefinition;
   isFnTrigger: boolean;
   /** Active layer is Fn: keys without anything are dimmed. */
   fnLayer: boolean;
@@ -77,6 +79,7 @@ export function KeyCap({ k, unit, state, onSelect, onDropAction }: {
     state.isFnTrigger && 'Touche Fn virtuelle',
     state.custom && `Personnalisé : ${state.custom.label}`,
     state.native && `Natif : ${state.native.label}`,
+    state.nativeFn && `Natif avec Fn : ${state.nativeFn.label}`,
   ]
     .filter(Boolean)
     .join(' · ');
@@ -113,7 +116,7 @@ export function KeyCap({ k, unit, state, onSelect, onDropAction }: {
             {unit >= 34 && <span className="truncate font-semibold">{shown.short}</span>}
           </span>
           {state.custom && state.native && (
-            <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-amber-400" title="Remplace un raccourci natif" />
+            <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-amber-400" title="Le raccourci natif reste disponible avec la touche Fn matérielle" />
           )}
         </>
       ) : (
@@ -128,6 +131,14 @@ export function KeyCap({ k, unit, state, onSelect, onDropAction }: {
           </span>
           {state.isFnTrigger && <span className="mt-auto truncate opacity-70">{state.legend.main}</span>}
         </>
+      )}
+      {state.nativeFn && !state.custom && (
+        <state.nativeFn.icon
+          size={Math.max(9, unit * 0.26)}
+          strokeWidth={2.2}
+          className="absolute right-[12%] bottom-[12%] text-amber-400"
+          aria-hidden
+        />
       )}
     </button>
   );
