@@ -30,4 +30,9 @@ export interface ActionDefinition {
   ahk: AhkOutput;
   /** True when the Kanata output runs a program (needs `danger-enable-cmd`). */
   kanataCmd?: boolean;
+  /**
+   * Firmware-only feature (e.g. Fn Lock): shown on keyboards that have it,
+   * never offered in the library nor exported.
+   */
+  nativeOnly?: boolean;
 }

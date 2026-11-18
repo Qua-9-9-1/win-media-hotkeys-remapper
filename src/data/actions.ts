@@ -13,6 +13,7 @@ import {
   Copy,
   Delete,
   Lock,
+  LockKeyhole,
   Moon,
   Play,
   Printer,
@@ -101,6 +102,10 @@ export const ACTIONS: ActionDefinition[] = [
     kanata: 'esc', ahk: { kind: 'remap', target: 'Esc' } },
   { id: 'key.disable', category: 'keys', label: 'Désactiver la touche', short: '⊘', icon: Ban,
     kanata: 'XX', ahk: { kind: 'code', code: 'return' } },
+
+  // ── Fonctions matérielles (affichage seulement, jamais exportées) ──
+  { id: 'hw.fnLock', category: 'system', label: 'Fn Lock (inverse F1-F12 et multimédia)', short: 'Fn Lock',
+    icon: LockKeyhole, nativeOnly: true, kanata: '_', ahk: { kind: 'code', code: 'return' } },
 ];
 
 const BY_ID = new Map(ACTIONS.map((a) => [a.id, a]));
@@ -112,6 +117,6 @@ export function getAction(id: string | undefined): ActionDefinition | undefined 
 export function actionsByCategory(): Array<[ActionCategory, ActionDefinition[]]> {
   return (Object.keys(CATEGORY_LABELS) as ActionCategory[]).map((c) => [
     c,
-    ACTIONS.filter((a) => a.category === c),
+    ACTIONS.filter((a) => a.category === c && !a.nativeOnly),
   ]);
 }

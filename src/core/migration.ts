@@ -7,6 +7,8 @@ export interface MigrationResult {
   added: number;
   skippedNative: number;
   skippedExisting: number;
+  /** Firmware-only features that a software remapper cannot reproduce. */
+  skippedUnsupported: number;
   /** Virtual Fn key auto-enabled because the source shortcuts need one. */
   enabledFnTrigger: boolean;
 }
@@ -31,9 +33,16 @@ export function migrateShortcuts(
   let added = 0;
   let skippedNative = 0;
   let skippedExisting = 0;
+  let skippedUnsupported = 0;
 
   for (const s of source.nativeShortcuts) {
-    if (!filter(s.action) || !getAction(s.action) || !targetKeys.has(s.key)) continue;
+    const action = getAction(s.action);
+    if (!filter(s.action) || !action || !targetKeys.has(s.key)) continue;
+    // Firmware-only features (Fn Lock...) cannot be reproduced by a remapper.
+    if (action.nativeOnly) {
+      skippedUnsupported++;
+      continue;
+    }
     // The target keyboard already offers this action natively: nothing is missing.
     if (nativeActions.has(s.action)) {
       skippedNative++;
@@ -53,6 +62,7 @@ export function migrateShortcuts(
     added,
     skippedNative,
     skippedExisting,
+    skippedUnsupported,
     enabledFnTrigger: needsFn,
   };
 }

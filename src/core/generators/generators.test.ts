@@ -94,4 +94,12 @@ describe('migrateShortcuts', () => {
     expect(r.config.fnTrigger).toBe('ScrollLock');
     expect(migrateShortcuts(initialConfig(), dell, dell).skippedNative).toBe(6);
   });
+
+  it('never imports nor exports firmware-only features like Fn Lock', () => {
+    const r = migrateShortcuts(initialConfig(), dell, k120);
+    expect(r.skippedUnsupported).toBe(1);
+    expect(r.config.layers.fn.Escape).toBeUndefined();
+    const forced = { ...withFn(), layers: { base: {}, fn: { Escape: 'hw.fnLock' } } };
+    expect(generateKanata(forced, k120)).not.toContain('esc');
+  });
 });

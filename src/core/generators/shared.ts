@@ -34,7 +34,7 @@ export function buildExportPlan(config: RemapConfig, profile: KeyboardProfile): 
     Object.entries(config.layers[layer])
       .filter(([key]) => remappable.has(key) && key !== config.fnTrigger)
       .map(([key, id]) => ({ key, action: getAction(id) }))
-      .filter((m): m is ResolvedMapping => m.action !== undefined)
+      .filter((m): m is ResolvedMapping => m.action !== undefined && !m.action.nativeOnly)
       .sort((a, b) => order.get(a.key)! - order.get(b.key)!);
 
   const fnTrigger =
